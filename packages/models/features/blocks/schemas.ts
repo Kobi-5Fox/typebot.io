@@ -2,7 +2,8 @@ import { z } from 'zod'
 import { BubbleBlockType } from './bubbles/enums'
 import { BubbleBlock, bubbleBlockSchema } from './bubbles/schemas'
 import { ChoiceInputBlock } from './inputs/choice'
-import { InputBlockType } from './inputs/enums'
+import { OptionsInputBlock } from './inputs/options'
+import { InputBlockType } from './inputs'
 import {
   InputBlock,
   InputBlockOptions,
@@ -58,7 +59,7 @@ export type BlockOptions =
   | LogicBlockOptions
   | IntegrationBlockOptions
 
-export type BlockWithItems = ConditionBlock | ChoiceInputBlock
+export type BlockWithItems = ConditionBlock | ChoiceInputBlock | OptionsInputBlock
 
 export type BlockBase = z.infer<typeof blockBaseSchema>
 

@@ -1,9 +1,6 @@
 import { checkChatsUsage } from '@/features/usage'
 import {
-  prefillVariables,
-  deepParseVariable,
-  parseVariables,
-  injectVariablesFromExistingResult,
+  deepParseVariable, injectVariablesFromExistingResult, parseVariables, prefillVariables
 } from '@/features/variables'
 import prisma from '@/lib/prisma'
 import { publicProcedure } from '@/utils/server/trpc'
@@ -21,15 +18,15 @@ import {
   Theme,
   Typebot,
   Variable,
-  VariableWithValue,
+  VariableWithValue
 } from 'models'
+import { env, isDefined, omit } from 'utils'
 import {
   continueBotFlow,
   getSession,
   setResultAsCompleted,
-  startBotFlow,
+  startBotFlow
 } from '../utils'
-import { env, isDefined, omit } from 'utils'
 
 export const sendMessageProcedure = publicProcedure
   .meta({
@@ -62,10 +59,10 @@ export const sendMessageProcedure = publicProcedure
           sessionId,
           typebot: typebot
             ? {
-                id: typebot.id,
-                theme: typebot.theme,
-                settings: typebot.settings,
-              }
+              id: typebot.id,
+              theme: typebot.theme,
+              settings: typebot.settings,
+            }
             : undefined,
           messages,
           input,
@@ -216,52 +213,52 @@ const getTypebot = async (
     throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
   const typebotQuery = isPreview
     ? await prisma.typebot.findFirst({
-        where: { id: typebot, workspace: { members: { some: { userId } } } },
-        select: {
-          id: true,
-          groups: true,
-          edges: true,
-          settings: true,
-          theme: true,
-          variables: true,
-          isArchived: true,
-        },
-      })
+      where: { id: typebot, workspace: { members: { some: { userId } } } },
+      select: {
+        id: true,
+        groups: true,
+        edges: true,
+        settings: true,
+        theme: true,
+        variables: true,
+        isArchived: true,
+      },
+    })
     : await prisma.publicTypebot.findFirst({
-        where: { typebot: { publicId: typebot } },
-        select: {
-          groups: true,
-          edges: true,
-          settings: true,
-          theme: true,
-          variables: true,
-          typebotId: true,
-          typebot: {
-            select: {
-              isArchived: true,
-              isClosed: true,
-              workspace: {
-                select: {
-                  id: true,
-                  plan: true,
-                  additionalChatsIndex: true,
-                  chatsLimitFirstEmailSentAt: true,
-                  chatsLimitSecondEmailSentAt: true,
-                  customChatsLimit: true,
-                },
+      where: { typebot: { publicId: typebot } },
+      select: {
+        groups: true,
+        edges: true,
+        settings: true,
+        theme: true,
+        variables: true,
+        typebotId: true,
+        typebot: {
+          select: {
+            isArchived: true,
+            isClosed: true,
+            workspace: {
+              select: {
+                id: true,
+                plan: true,
+                additionalChatsIndex: true,
+                chatsLimitFirstEmailSentAt: true,
+                chatsLimitSecondEmailSentAt: true,
+                customChatsLimit: true,
               },
             },
           },
         },
-      })
+      },
+    })
 
   const parsedTypebot =
     typebotQuery && 'typebot' in typebotQuery
       ? ({
-          id: typebotQuery.typebotId,
-          ...omit(typebotQuery.typebot, 'workspace'),
-          ...omit(typebotQuery, 'typebot', 'typebotId'),
-        } as StartTypebot & Pick<Typebot, 'isArchived' | 'isClosed'>)
+        id: typebotQuery.typebotId,
+        ...omit(typebotQuery.typebot, 'workspace'),
+        ...omit(typebotQuery, 'typebot', 'typebotId'),
+      } as StartTypebot & Pick<Typebot, 'isArchived' | 'isClosed'>)
       : (typebotQuery as StartTypebot & Pick<Typebot, 'isArchived'>)
 
   if (
@@ -282,9 +279,9 @@ const getTypebot = async (
   const hasReachedLimit =
     typebotQuery && 'typebot' in typebotQuery
       ? await checkChatsUsage({
-          typebotId: parsedTypebot.id,
-          workspace: typebotQuery.typebot.workspace,
-        })
+        typebotId: parsedTypebot.id,
+        workspace: typebotQuery.typebot.workspace,
+      })
       : false
 
   if (hasReachedLimit)
@@ -316,9 +313,9 @@ const getResult = async ({
   const existingResult =
     resultId && !isNewResultOnRefreshEnabled
       ? ((await prisma.result.findFirst({
-          where: { id: resultId },
-          select,
-        })) as Pick<Result, 'id' | 'variables' | 'hasStarted'>)
+        where: { id: resultId },
+        select,
+      })) as Pick<Result, 'id' | 'variables' | 'hasStarted'>)
       : undefined
 
   if (existingResult) {

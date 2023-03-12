@@ -1,29 +1,27 @@
+import { ContextMenu } from '@/components/ContextMenu'
+import { RightPanel, useEditor, useTypebot } from '@/features/editor'
+import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { setMultipleRefs } from '@/utils/helpers'
 import {
   Editable,
   EditableInput,
   EditablePreview,
   SlideFade,
   Stack,
-  useColorModeValue,
+  useColorModeValue
 } from '@chakra-ui/react'
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useDrag } from '@use-gesture/react'
 import { Group } from 'models'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useDebounce } from 'use-debounce'
+import { isDefined, isNotDefined } from 'utils'
 import {
-  Coordinates,
-  useGraph,
-  useGroupsCoordinates,
-  useBlockDnd,
+  Coordinates, useBlockDnd, useGraph,
+  useGroupsCoordinates
 } from '../../../providers'
 import { BlockNodesList } from '../BlockNode/BlockNodesList'
-import { isDefined, isNotDefined } from 'utils'
-import { useTypebot, RightPanel, useEditor } from '@/features/editor'
-import { GroupNodeContextMenu } from './GroupNodeContextMenu'
-import { useDebounce } from 'use-debounce'
-import { ContextMenu } from '@/components/ContextMenu'
-import { setMultipleRefs } from '@/utils/helpers'
-import { useDrag } from '@use-gesture/react'
 import { GroupFocusToolbar } from './GroupFocusToolbar'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { GroupNodeContextMenu } from './GroupNodeContextMenu'
 
 type Props = {
   group: Group
@@ -176,7 +174,6 @@ const NonMemoizedDraggableGroupNode = ({
       ],
     }
   )
-
   return (
     <ContextMenu<HTMLDivElement>
       renderMenu={() => <GroupNodeContextMenu groupIndex={groupIndex} />}

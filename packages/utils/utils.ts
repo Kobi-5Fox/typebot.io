@@ -1,23 +1,13 @@
 import type {
-  BubbleBlock,
-  ChoiceInputBlock,
-  ConditionBlock,
-  InputBlock,
+  Block, BlockType, BlockWithOptionsType, BubbleBlock,
+  ChoiceInputBlock, ConditionBlock, ImageBubbleBlock, InputBlock,
   IntegrationBlock,
-  LogicBlock,
-  Block,
-  TextInputBlock,
-  TextBubbleBlock,
-  WebhookBlock,
-  BlockType,
-  ImageBubbleBlock,
-  VideoBubbleBlock,
-  BlockWithOptionsType,
+  LogicBlock, OptionsInputBlock, TextBubbleBlock, TextInputBlock, VideoBubbleBlock, WebhookBlock
 } from 'models'
-import { InputBlockType } from 'models/features/blocks/inputs/enums'
 import { BubbleBlockType } from 'models/features/blocks/bubbles/enums'
-import { LogicBlockType } from 'models/features/blocks/logic/enums'
+import { InputBlockType } from 'models/features/blocks/inputs/enums'
 import { IntegrationBlockType } from 'models/features/blocks/integrations/enums'
+import { LogicBlockType } from 'models/features/blocks/logic/enums'
 
 export const sendRequest = async <ResponseData>(
   params:
@@ -30,6 +20,7 @@ export const sendRequest = async <ResponseData>(
 ): Promise<{ data?: ResponseData; error?: Error }> => {
   try {
     const url = typeof params === 'string' ? params : params.url
+    
     const response = await fetch(url, {
       method: typeof params === 'string' ? 'GET' : params.method,
       mode: 'cors',
@@ -95,6 +86,14 @@ export const isSingleChoiceInput = (block: Block): block is ChoiceInputBlock =>
   'options' in block &&
   !block.options.isMultipleChoice
 
+export const isOptionsInput = (block: Block): block is OptionsInputBlock =>
+  block.type === InputBlockType.OPTION
+
+export const isSingleOptionsInput = (block: Block): block is OptionsInputBlock =>
+  block.type === InputBlockType.OPTION &&
+  'options' in block &&
+  !block.options.isMultipleChoice
+
 export const isConditionBlock = (block: Block): block is ConditionBlock =>
   block.type === LogicBlockType.CONDITION
 
@@ -132,12 +131,12 @@ export const blockTypeHasWebhook = (
 
 export const blockTypeHasItems = (
   type: BlockType
-): type is LogicBlockType.CONDITION | InputBlockType.CHOICE =>
-  type === LogicBlockType.CONDITION || type === InputBlockType.CHOICE
+): type is LogicBlockType.CONDITION | InputBlockType.CHOICE | InputBlockType.OPTION =>
+  type === LogicBlockType.CONDITION || type === InputBlockType.CHOICE ||type===InputBlockType.OPTION 
 
 export const blockHasItems = (
   block: Block
-): block is ConditionBlock | ChoiceInputBlock =>
+): block is ConditionBlock | ChoiceInputBlock | OptionsInputBlock=>
   'items' in block && isDefined(block.items)
 
 export const byId = (id?: string) => (obj: { id: string }) => obj.id === id

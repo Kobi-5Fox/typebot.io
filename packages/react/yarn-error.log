@@ -1,0 +1,81 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js run dev
+
+PATH: 
+  C:\Users\Admin\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Admin\bin;C:\Python311\Scripts;C:\Python311;C:\Program Files\Microsoft\jdk-11.0.14.9-hotspot;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\jdk\jdk-11.0.2\bin;C:\Program Files\dotnet;C:\Program Files\Go\bin;C:\Users\Admin\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Admin\AppData\Local\pnpm;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Python310\Scripts;C:\Python310;C:\Users\Admin\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\Admin\AppData\Local\Programs\Python\Python310;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Admin\AppData\Local\Android\Sdk\platform-tools;C:\Users\Admin\AppData\Local\JetBrains\PyCharm Community Edition 2022.2\bin;C:\Users\Admin\.deno\bin;C:\Users\Admin\go\bin;C:\Users\Admin\AppData\Roaming\Python\Scripts;C:\Users\Admin\AppData\Roaming\npm;C:\Users\Admin\.dotnet\tools;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  18.14.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: Failed to replace env in config: ${NPM_TOKEN}
+      at C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:94926:13
+      at String.replace (<anonymous>)
+      at envReplace (C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:94921:16)
+      at Function.normalizeConfig (C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:31930:69)
+      at NpmRegistry.<anonymous> (C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:31960:34)
+      at Generator.next (<anonymous>)
+      at step (C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
+      at C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "@typebot.io/react",
+    "version": "0.0.20",
+    "description": "React library to display typebots on your website",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "type": "module",
+    "scripts": {
+      "stories:dev": "ladle serve -p 3006",
+      "stories:build": "ladle build",
+      "dev": "rollup --watch --config rollup.config.js",
+      "build": "rollup --config rollup.config.js",
+      "lint": "eslint --fix \"src/**/*.ts*\""
+    },
+    "keywords": [],
+    "author": "Baptiste Arnaud",
+    "license": "ISC",
+    "dependencies": {
+      "@ladle/react": "2.5.1"
+    },
+    "devDependencies": {
+      "@babel/preset-react": "^7.18.6",
+      "@babel/preset-typescript": "^7.21.0",
+      "@rollup/plugin-babel": "6.0.3",
+      "@rollup/plugin-node-resolve": "15.0.1",
+      "@rollup/plugin-terser": "^0.4.0",
+      "@rollup/plugin-typescript": "11.0.0",
+      "@typebot.io/js": "workspace:*",
+      "@types/node": "18.14.0",
+      "@types/react": "18.0.28",
+      "db": "workspace:*",
+      "eslint": "^8.34.0",
+      "eslint-config-custom": "workspace:*",
+      "models": "workspace:*",
+      "react": "18.2.0",
+      "rollup": "3.17.2",
+      "rollup-plugin-typescript-paths": "^1.4.0",
+      "tsconfig": "workspace:*",
+      "tslib": "^2.5.0",
+      "tsx": "3.12.3",
+      "typescript": "^4.9.5",
+      "utils": "workspace:*"
+    },
+    "peerDependencies": {
+      "@typebot.io/js": "workspace:*",
+      "react": "18.x"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

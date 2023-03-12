@@ -1,42 +1,41 @@
+import { FlagIcon } from '@/components/icons'
+import { AudioBubbleIcon } from '@/features/blocks/bubbles/audio'
+import { EmbedBubbleIcon } from '@/features/blocks/bubbles/embed'
+import { ImageBubbleIcon } from '@/features/blocks/bubbles/image'
+import { TextBubbleIcon } from '@/features/blocks/bubbles/textBubble'
+import { VideoBubbleIcon } from '@/features/blocks/bubbles/video'
+import { ButtonsInputIcon } from '@/features/blocks/inputs/buttons'
+import { DateInputIcon } from '@/features/blocks/inputs/date'
+import { EmailInputIcon } from '@/features/blocks/inputs/emailInput'
+import { FileInputIcon } from '@/features/blocks/inputs/fileUpload'
+import { NumberInputIcon } from '@/features/blocks/inputs/number'
+import { OptionsInputIcon } from '@/features/blocks/inputs/options'
+import { PaymentInputIcon } from '@/features/blocks/inputs/payment'
+import { PhoneInputIcon } from '@/features/blocks/inputs/phone'
+import { RatingInputIcon } from '@/features/blocks/inputs/rating'
+import { TextInputIcon } from '@/features/blocks/inputs/textInput'
+import { UrlInputIcon } from '@/features/blocks/inputs/url'
+import { ChatwootLogo } from '@/features/blocks/integrations/chatwoot'
+import { GoogleAnalyticsLogo } from '@/features/blocks/integrations/googleAnalytics'
+import { GoogleSheetsLogo } from '@/features/blocks/integrations/googleSheets'
+import { MakeComLogo } from '@/features/blocks/integrations/makeCom'
+import { PabblyConnectLogo } from '@/features/blocks/integrations/pabbly'
+import { SendEmailIcon } from '@/features/blocks/integrations/sendEmail'
+import { WebhookIcon } from '@/features/blocks/integrations/webhook'
+import { ZapierLogo } from '@/features/blocks/integrations/zapier'
+import { ConditionIcon } from '@/features/blocks/logic/condition'
+import { RedirectIcon } from '@/features/blocks/logic/redirect'
+import { ScriptIcon } from '@/features/blocks/logic/script/components/ScriptIcon'
+import { SetVariableIcon } from '@/features/blocks/logic/setVariable'
+import { TypebotLinkIcon } from '@/features/blocks/logic/typebotLink'
+import { WaitIcon } from '@/features/blocks/logic/wait/components/WaitIcon'
 import { IconProps, useColorModeValue } from '@chakra-ui/react'
 import {
-  BubbleBlockType,
+  BlockType, BubbleBlockType,
   InputBlockType,
   IntegrationBlockType,
-  LogicBlockType,
-  BlockType,
+  LogicBlockType
 } from 'models'
-import React from 'react'
-import { TextBubbleIcon } from '@/features/blocks/bubbles/textBubble'
-import { ImageBubbleIcon } from '@/features/blocks/bubbles/image'
-import { VideoBubbleIcon } from '@/features/blocks/bubbles/video'
-import { ChatwootLogo } from '@/features/blocks/integrations/chatwoot'
-import { FlagIcon } from '@/components/icons'
-import { SendEmailIcon } from '@/features/blocks/integrations/sendEmail'
-import { PabblyConnectLogo } from '@/features/blocks/integrations/pabbly'
-import { MakeComLogo } from '@/features/blocks/integrations/makeCom'
-import { ZapierLogo } from '@/features/blocks/integrations/zapier'
-import { WebhookIcon } from '@/features/blocks/integrations/webhook'
-import { GoogleSheetsLogo } from '@/features/blocks/integrations/googleSheets'
-import { TypebotLinkIcon } from '@/features/blocks/logic/typebotLink'
-import { RedirectIcon } from '@/features/blocks/logic/redirect'
-import { ConditionIcon } from '@/features/blocks/logic/condition'
-import { SetVariableIcon } from '@/features/blocks/logic/setVariable'
-import { FileInputIcon } from '@/features/blocks/inputs/fileUpload'
-import { RatingInputIcon } from '@/features/blocks/inputs/rating'
-import { PaymentInputIcon } from '@/features/blocks/inputs/payment'
-import { ButtonsInputIcon } from '@/features/blocks/inputs/buttons'
-import { PhoneInputIcon } from '@/features/blocks/inputs/phone'
-import { DateInputIcon } from '@/features/blocks/inputs/date'
-import { UrlInputIcon } from '@/features/blocks/inputs/url'
-import { EmailInputIcon } from '@/features/blocks/inputs/emailInput'
-import { NumberInputIcon } from '@/features/blocks/inputs/number'
-import { TextInputIcon } from '@/features/blocks/inputs/textInput'
-import { EmbedBubbleIcon } from '@/features/blocks/bubbles/embed'
-import { GoogleAnalyticsLogo } from '@/features/blocks/integrations/googleAnalytics'
-import { AudioBubbleIcon } from '@/features/blocks/bubbles/audio'
-import { WaitIcon } from '@/features/blocks/logic/wait/components/WaitIcon'
-import { ScriptIcon } from '@/features/blocks/logic/script/components/ScriptIcon'
 
 type BlockIconProps = { type: BlockType } & IconProps
 
@@ -69,6 +68,8 @@ export const BlockIcon = ({ type, ...props }: BlockIconProps) => {
       return <PhoneInputIcon color={orange} {...props} />
     case InputBlockType.CHOICE:
       return <ButtonsInputIcon color={orange} {...props} />
+    case InputBlockType.OPTION:
+      return <OptionsInputIcon />  
     case InputBlockType.PAYMENT:
       return <PaymentInputIcon color={orange} {...props} />
     case InputBlockType.RATING:

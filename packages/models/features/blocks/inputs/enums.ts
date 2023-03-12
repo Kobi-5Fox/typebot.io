@@ -1,4 +1,5 @@
 export enum InputBlockType {
+  OPTION = 'option input',
   TEXT = 'text input',
   NUMBER = 'number input',
   EMAIL = 'email input',

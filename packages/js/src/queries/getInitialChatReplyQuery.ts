@@ -15,7 +15,7 @@ export async function getInitialChatReplyQuery({
 }) {
   if (!typebot)
     throw new Error('Typebot ID is required to get initial messages')
-
+  
   return sendRequest<InitialChatReply>({
     method: 'POST',
     url: `${isNotEmpty(apiHost) ? apiHost : guessApiHost()}/api/v1/sendMessage`,

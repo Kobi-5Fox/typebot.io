@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { withSentryConfig } = require('@sentry/nextjs')
-const path = require('path')
+// const path = require('path')
 const withTM = require('next-transpile-modules')(['utils', 'models', 'emails'])
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withTM({
   reactStrictMode: true,
   output: 'standalone',
-  experimental: {
-    outputFileTracingRoot: path.join(__dirname, '../../'),
-  },
+  // experimental: {
+  //   outputFileTracingRoot: path.join(__dirname, '../../'),
+  // },
   headers: async () => {
     return [
       {

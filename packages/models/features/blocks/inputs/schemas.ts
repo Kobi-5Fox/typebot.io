@@ -1,18 +1,18 @@
 import { z } from 'zod'
+import { optionBaseSchema } from '../baseSchemas'
 import { choiceInputOptionsSchema, choiceInputSchema } from './choice'
 import { dateInputOptionsSchema, dateInputSchema } from './date'
 import { emailInputOptionsSchema, emailInputSchema } from './email'
+import { fileInputOptionsSchema, fileInputStepSchema } from './file'
 import { numberInputOptionsSchema, numberInputSchema } from './number'
+import { optionsInputOptionsSchema, optionsInputSchema } from './options'
 import { paymentInputOptionsSchema, paymentInputSchema } from './payment'
 import {
-  phoneNumberInputOptionsSchema,
-  phoneNumberInputBlockSchema,
+  phoneNumberInputBlockSchema, phoneNumberInputOptionsSchema
 } from './phone'
-import { ratingInputOptionsSchema, ratingInputBlockSchema } from './rating'
+import { ratingInputBlockSchema, ratingInputOptionsSchema } from './rating'
 import { textInputOptionsSchema, textInputSchema } from './text'
-import { fileInputOptionsSchema, fileInputStepSchema } from './file'
 import { urlInputOptionsSchema, urlInputSchema } from './url'
-import { optionBaseSchema } from '../baseSchemas'
 
 export type OptionBase = z.infer<typeof optionBaseSchema>
 
@@ -26,8 +26,10 @@ export const inputBlockOptionsSchema = textInputOptionsSchema
   .or(paymentInputOptionsSchema)
   .or(ratingInputOptionsSchema)
   .or(fileInputOptionsSchema)
+  .or(optionsInputOptionsSchema)
 
 export const inputBlockSchema = textInputSchema
+  .or(optionsInputSchema)
   .or(numberInputSchema)
   .or(emailInputSchema)
   .or(urlInputSchema)

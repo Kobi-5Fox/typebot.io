@@ -105,7 +105,6 @@ export const Graph = ({
     setDraggedBlock(undefined)
     setDraggedBlockType(undefined)
   }
-
   const handleCaptureMouseDown = (e: MouseEvent) => {
     const isRightClick = e.button === 2
     if (isRightClick) e.stopPropagation()

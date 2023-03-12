@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
 import type { BotProps } from '@typebot.io/js'
+import { useEffect, useRef } from 'react'
 
 type Props = BotProps & {
   style?: React.CSSProperties

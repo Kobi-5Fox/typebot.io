@@ -1,26 +1,15 @@
-import {
-  useDisclosure,
-  Flex,
-  Popover,
-  Input,
-  PopoverContent,
-  Button,
-  InputProps,
-  IconButton,
-  HStack,
-  useColorModeValue,
-  PopoverAnchor,
-  Portal,
-  Tag,
-} from '@chakra-ui/react'
 import { EditIcon, PlusIcon, TrashIcon } from '@/components/icons'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider/TypebotProvider'
+import { useParentModal } from '@/features/graph/providers/ParentModalProvider'
+import { useOutsideClick } from '@/hooks/useOutsideClick'
+import {
+  Button, Flex, HStack, IconButton, Input, InputProps, Popover, PopoverAnchor, PopoverContent, Portal,
+  Tag, useColorModeValue, useDisclosure
+} from '@chakra-ui/react'
 import { createId } from '@paralleldrive/cuid2'
 import { Variable } from 'models'
-import React, { useState, useRef, ChangeEvent, useEffect } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { byId, isDefined, isNotDefined } from 'utils'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
-import { useParentModal } from '@/features/graph/providers/ParentModalProvider'
 
 type Props = {
   initialVariableId?: string

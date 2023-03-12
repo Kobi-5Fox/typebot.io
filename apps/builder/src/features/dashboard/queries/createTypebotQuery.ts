@@ -10,9 +10,10 @@ export const createTypebotQuery = async ({
     name: 'My typebot',
     workspaceId,
   }
-  return sendRequest<Typebot>({
+  const x= sendRequest<Typebot>({
     url: `/api/typebots`,
     method: 'POST',
     body: typebot,
   })
+  return x;
 }

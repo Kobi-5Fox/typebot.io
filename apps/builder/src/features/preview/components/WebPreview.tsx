@@ -18,8 +18,9 @@ export const WebPreview = () => {
   }
 
   if (!typebot) return null
+  console.log('test', startPreviewAtGroup)
 
-  return (
+  const x = (
     <Standard
       key={`web-preview${startPreviewAtGroup ?? ''}`}
       typebot={typebot}
@@ -27,9 +28,11 @@ export const WebPreview = () => {
       onNewInputBlock={setPreviewingBlock}
       onNewLogs={handleNewLogs}
       style={{
+        backgroundColor: 'green',
         borderWidth: '1px',
         borderRadius: '0.25rem',
       }}
     />
   )
+  return x
 }

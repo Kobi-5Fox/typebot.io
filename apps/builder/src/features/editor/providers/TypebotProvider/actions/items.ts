@@ -1,19 +1,13 @@
-import {
-  ItemIndices,
-  Item,
-  BlockWithItems,
-  defaultConditionContent,
-  ItemType,
-  Block,
-  LogicBlockType,
-  InputBlockType,
-} from 'models'
-import { SetTypebot } from '../TypebotProvider'
-import produce from 'immer'
-import { cleanUpEdgeDraft } from './edges'
-import { byId, blockHasItems } from 'utils'
 import { createId } from '@paralleldrive/cuid2'
+import produce from 'immer'
 import { WritableDraft } from 'immer/dist/types/types-external'
+import {
+  Block, BlockWithItems,
+  defaultConditionContent, InputBlockType, Item, ItemIndices, ItemType, LogicBlockType
+} from 'models'
+import { blockHasItems, byId } from 'utils'
+import { SetTypebot } from '../TypebotProvider'
+import { cleanUpEdgeDraft } from './edges'
 
 type NewItem = Pick<Item, 'blockId' | 'outgoingEdgeId' | 'type'> & Partial<Item>
 
@@ -44,6 +38,19 @@ const createItem = (
     }
     case InputBlockType.CHOICE: {
       if (item.type === ItemType.BUTTON) {
+        const newItem = {
+          ...item,
+          id: 'id' in item && item.id ? item.id : createId(),
+          content: item.content,
+        }
+        block.items.splice(itemIndex, 0, newItem)
+        return newItem
+      }
+      break
+    }
+    
+    case InputBlockType.OPTION: {
+      if (item.type === ItemType.OPTION) {
         const newItem = {
           ...item,
           id: 'id' in item && item.id ? item.id : createId(),
@@ -128,3 +135,4 @@ const duplicateItemDraft = (blockId: string) => (item: Item) => ({
 })
 
 export { itemsAction, duplicateItemDraft }
+

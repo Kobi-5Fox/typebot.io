@@ -1,15 +1,13 @@
-import { HStack, Text, Tooltip } from '@chakra-ui/react'
+import { isFreePlan, LockTag } from '@/features/billing'
 import { useWorkspace } from '@/features/workspace'
+import { HStack, Text, Tooltip } from '@chakra-ui/react'
 import { Plan } from 'db'
 import {
-  BubbleBlockType,
+  BlockType, BubbleBlockType,
   InputBlockType,
   IntegrationBlockType,
-  LogicBlockType,
-  BlockType,
+  LogicBlockType
 } from 'models'
-import React from 'react'
-import { isFreePlan, LockTag } from '@/features/billing'
 
 type Props = { type: BlockType }
 
@@ -46,6 +44,8 @@ export const BlockTypeLabel = ({ type }: Props): JSX.Element => {
       return <Text>Phone</Text>
     case InputBlockType.CHOICE:
       return <Text>Button</Text>
+    case InputBlockType.OPTION:
+      return <Text>Options</Text>
     case InputBlockType.PAYMENT:
       return <Text>Payment</Text>
     case InputBlockType.RATING:

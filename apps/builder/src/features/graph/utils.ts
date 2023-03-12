@@ -6,6 +6,7 @@ import {
   BubbleBlockType,
   defaultChatwootOptions,
   defaultChoiceInputOptions,
+  defaultOptionsInputOptions,
   defaultConditionContent,
   defaultDateInputOptions,
   defaultEmailInputOptions,
@@ -54,6 +55,7 @@ import {
   isChoiceInput,
   isConditionBlock,
   isDefined,
+  isOptionsInput,
 } from 'utils'
 
 const roundSize = 20
@@ -346,12 +348,14 @@ export const parseNewBlock = (
 }
 
 const parseDefaultItems = (
-  type: LogicBlockType.CONDITION | InputBlockType.CHOICE,
+  type: LogicBlockType.CONDITION | InputBlockType.CHOICE | InputBlockType.OPTION,
   blockId: string
 ): Item[] => {
   switch (type) {
     case InputBlockType.CHOICE:
       return [{ id: createId(), blockId, type: ItemType.BUTTON }]
+    case InputBlockType.OPTION:
+      return [{ id: createId(), blockId, type: ItemType.OPTION }]
     case LogicBlockType.CONDITION:
       return [
         {
@@ -395,6 +399,8 @@ const parseDefaultBlockOptions = (type: BlockWithOptionsType): BlockOptions => {
       return defaultUrlInputOptions
     case InputBlockType.CHOICE:
       return defaultChoiceInputOptions
+    case InputBlockType.OPTION:
+      return defaultOptionsInputOptions
     case InputBlockType.PAYMENT:
       return defaultPaymentInputOptions
     case InputBlockType.RATING:
@@ -427,7 +433,6 @@ const parseDefaultBlockOptions = (type: BlockWithOptionsType): BlockOptions => {
   }
 }
 
-export const hasDefaultConnector = (block: Block) =>
-  (!isChoiceInput(block) && !isConditionBlock(block)) ||
-  (block.type === InputBlockType.CHOICE &&
-    isDefined(block.options.dynamicVariableId))
+export const hasDefaultConnector = (block: Block):boolean =>
+  (!isChoiceInput(block) && !isConditionBlock(block) && !isOptionsInput(block)) ||
+  ((block.type === InputBlockType.CHOICE || block.type===InputBlockType.OPTION) && isDefined(block.options.dynamicVariableId))

@@ -1,7 +1,7 @@
 import { ButtonsItemNode } from '@/features/blocks/inputs/buttons'
+import { OptionsItemNode } from '@/features/blocks/inputs/options'
 import { ConditionItemNode } from '@/features/blocks/logic/condition'
 import { Item, ItemIndices, ItemType } from 'models'
-import React from 'react'
 
 type Props = {
   item: Item
@@ -14,6 +14,15 @@ export const ItemNodeContent = ({ item, indices, isMouseOver }: Props) => {
     case ItemType.BUTTON:
       return (
         <ButtonsItemNode
+          key={`${item.id}-${item.content}`}
+          item={item}
+          isMouseOver={isMouseOver}
+          indices={indices}
+        />
+      )
+    case ItemType.OPTION:
+      return (
+        <OptionsItemNode
           key={`${item.id}-${item.content}`}
           item={item}
           isMouseOver={isMouseOver}

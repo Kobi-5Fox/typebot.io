@@ -33,12 +33,13 @@ import { GoogleSheetsNodeContent } from '@/features/blocks/integrations/googleSh
 import { GoogleAnalyticsNodeContent } from '@/features/blocks/integrations/googleAnalytics/components/GoogleAnalyticsNodeContent'
 import { ZapierContent } from '@/features/blocks/integrations/zapier'
 import { SendEmailContent } from '@/features/blocks/integrations/sendEmail'
-import { isInputBlock, isChoiceInput } from 'utils'
+import { isInputBlock, isChoiceInput, isOptionsInput } from 'utils'
 import { MakeComContent } from '@/features/blocks/integrations/makeCom'
 import { AudioBubbleNode } from '@/features/blocks/bubbles/audio'
 import { WaitNodeContent } from '@/features/blocks/logic/wait/components/WaitNodeContent'
 import { ScriptNodeContent } from '@/features/blocks/logic/script/components/ScriptNodeContent'
 import { ButtonsBlockNode } from '@/features/blocks/inputs/buttons/components/ButtonsBlockNode'
+import {OptionsBlockNode} from '@/features/blocks/inputs/options/components/OptionsBlockNode'
 
 type Props = {
   block: Block | StartBlock
@@ -47,7 +48,7 @@ type Props = {
 export const BlockNodeContent = ({ block, indices }: Props): JSX.Element => {
   if (
     isInputBlock(block) &&
-    !isChoiceInput(block) &&
+    !isChoiceInput(block) && !isOptionsInput(block) &&
     block.options.variableId
   ) {
     return <WithVariableContent block={block} />
@@ -93,6 +94,10 @@ export const BlockNodeContent = ({ block, indices }: Props): JSX.Element => {
     case InputBlockType.CHOICE: {
       return <ButtonsBlockNode block={block} indices={indices} />
     }
+    case InputBlockType.OPTION:{
+      return <OptionsBlockNode block={block} indices={indices} />
+    }
+
     case InputBlockType.PHONE: {
       return <PhoneNodeContent placeholder={block.options.labels.placeholder} />
     }
