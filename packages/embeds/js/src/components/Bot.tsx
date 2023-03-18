@@ -46,6 +46,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
     })
     const typebotIdFromProps =
       typeof props.typebot === 'string' ? props.typebot : undefined
+
     const { data, error } = await getInitialChatReplyQuery({
       typebot: props.typebot,
       apiHost: props.apiHost,
@@ -59,9 +60,14 @@ export const Bot = (props: BotProps & { class?: string }) => {
         ...props.prefilledVariables,
       },
     })
+  
+  
+    console.log("Inside Package getInitialChatReply", error)
+  
+  
     if (error && 'code' in error && typeof error.code === 'string') {
       if (['BAD_REQUEST', 'FORBIDDEN'].includes(error.code))
-        setError(new Error('This bot is now closed.'))
+        setError(new Error('This bot is now closed -Bot.'))
       if (error.code === 'NOT_FOUND')
         setError(new Error("The bot you're looking for doesn't exist."))
       return

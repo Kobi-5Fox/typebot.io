@@ -47,23 +47,26 @@ export const WorkspaceProvider = ({
   const { typebot } = useTypebot()
 
   const trpcContext = trpc.useContext()
-
-  const { data: workspacesData } = trpc.workspace.listWorkspaces.useQuery(
+// trpc is a router mapped to localhost:3000/api/trpc
+// workspace is sub router containing the procedures like listWorkspaces, createWorkspaces
+// First lists all the workspaces
+const { data: workspacesData } = trpc.workspace.listWorkspaces.useQuery(
     undefined,
     {
       enabled: !!user,
     }
   )
+  // gets array of workspace
   const workspaces = useMemo(
     () => workspacesData?.workspaces ?? [],
     [workspacesData?.workspaces]
   )
-
+    // gets first workspace
   const { data: workspaceData } = trpc.workspace.getWorkspace.useQuery(
     { workspaceId: workspaceId as string },
     { enabled: !!workspaceId }
   )
-
+// gets all the members in the workspace
   const { data: membersData } = trpc.workspace.listMembersInWorkspace.useQuery(
     { workspaceId: workspaceId as string },
     { enabled: !!workspaceId }

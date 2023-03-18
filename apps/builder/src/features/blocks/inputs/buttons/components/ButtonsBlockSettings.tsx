@@ -14,6 +14,8 @@ type Props = {
 export const ButtonsBlockSettings = ({ options, onOptionsChange }: Props) => {
   const handleIsMultipleChange = (isMultipleChoice: boolean) =>
     options && onOptionsChange({ ...options, isMultipleChoice })
+  const handleIsDropdownChange = (isDropdownInput: boolean) =>
+    options && onOptionsChange({ ...options, isDropdownInput })
   const handleButtonLabelChange = (buttonLabel: string) =>
     options && onOptionsChange({ ...options, buttonLabel })
   const handleVariableChange = (variable?: Variable) =>
@@ -23,6 +25,11 @@ export const ButtonsBlockSettings = ({ options, onOptionsChange }: Props) => {
 
   return (
     <Stack spacing={4}>
+      <SwitchWithLabel
+        label="Switch to Dropdown view?"
+        initialValue={options?.isDropdownInput ?? false}
+        onCheckChange={handleIsDropdownChange}
+      />
       <SwitchWithLabel
         label="Multiple choice?"
         initialValue={options?.isMultipleChoice ?? false}

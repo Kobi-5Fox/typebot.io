@@ -30,6 +30,7 @@ import { deepParseVariables } from '@/features/variables/deepParseVariable'
 import { parseVariables } from '@/features/variables/parseVariables'
 
 export const sendMessage = publicProcedure
+
   .meta({
     openapi: {
       method: 'POST',

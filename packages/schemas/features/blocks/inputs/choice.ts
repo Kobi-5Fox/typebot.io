@@ -7,6 +7,7 @@ import { InputBlockType } from './enums'
 
 export const choiceInputOptionsSchema = optionBaseSchema.merge(
   z.object({
+    isDropdownInput:z.boolean(),
     isMultipleChoice: z.boolean(),
     buttonLabel: z.string(),
     dynamicVariableId: z.string().optional(),
@@ -16,6 +17,7 @@ export const choiceInputOptionsSchema = optionBaseSchema.merge(
 export const defaultChoiceInputOptions: ChoiceInputOptions = {
   buttonLabel: defaultButtonLabel,
   isMultipleChoice: false,
+  isDropdownInput:false
 }
 
 export const buttonItemSchema = itemBaseSchema.merge(
