@@ -45,6 +45,7 @@ import { DateInputSettings } from '@/features/blocks/inputs/date/components/Date
 import { PhoneInputSettings } from '@/features/blocks/inputs/phone/components/PhoneInputSettings'
 import { GoogleSheetsSettings } from '@/features/blocks/integrations/googleSheets/components/GoogleSheetsSettings'
 import { ChatwootSettings } from '@/features/blocks/integrations/chatwoot/components/ChatwootSettings'
+import { PancardSettings } from '@/features/blocks/inputs/pancard/components/PancardSettings'
 
 type Props = {
   block: BlockWithOptions
@@ -122,6 +123,14 @@ export const BlockSettings = ({
     case InputBlockType.EMAIL: {
       return (
         <EmailInputSettings
+          options={block.options}
+          onOptionsChange={updateOptions}
+        />
+      )
+    }
+    case InputBlockType.PANCARD: {
+      return (
+        <PancardSettings
           options={block.options}
           onOptionsChange={updateOptions}
         />

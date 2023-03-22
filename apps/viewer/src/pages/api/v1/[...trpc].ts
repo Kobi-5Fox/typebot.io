@@ -6,7 +6,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { createContext } from '@/helpers/server/context'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("inside /api/v1",req.body)
   await cors(req, res)
 
   return createOpenApiNextHandler({

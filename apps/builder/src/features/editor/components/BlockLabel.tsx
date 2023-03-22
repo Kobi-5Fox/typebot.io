@@ -29,6 +29,8 @@ export const BlockLabel = ({ type }: Props): JSX.Element => {
       return <Text>Number</Text>
     case InputBlockType.EMAIL:
       return <Text>Email</Text>
+    case InputBlockType.PANCARD:
+      return <Text>Pan Number</Text>
     case InputBlockType.URL:
       return <Text>Website</Text>
     case InputBlockType.DATE:

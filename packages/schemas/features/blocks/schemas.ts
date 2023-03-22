@@ -24,6 +24,7 @@ import {
   paymentInputSchema,
   ratingInputBlockSchema,
   fileInputStepSchema,
+  pancardSchema,
 } from './inputs'
 import {
   chatwootBlockSchema,
@@ -110,6 +111,7 @@ export const inputBlockSchema = z.discriminatedUnion('type', [
   paymentInputSchema,
   ratingInputBlockSchema,
   fileInputStepSchema,
+  pancardSchema
 ])
 
 export type InputBlock = z.infer<typeof inputBlockSchema>

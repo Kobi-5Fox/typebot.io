@@ -18,6 +18,7 @@ import {
   defaultConditionContent,
   defaultDateInputOptions,
   defaultEmailInputOptions,
+  defaultPancardOptions,
   defaultEmbedBubbleContent,
   defaultFileInputOptions,
   defaultGoogleAnalyticsOptions,
@@ -86,6 +87,8 @@ const parseDefaultBlockOptions = (type: BlockWithOptionsType): BlockOptions => {
       return defaultNumberInputOptions
     case InputBlockType.EMAIL:
       return defaultEmailInputOptions
+    case InputBlockType.PANCARD:
+      return defaultPancardOptions
     case InputBlockType.DATE:
       return defaultDateInputOptions
     case InputBlockType.PHONE:

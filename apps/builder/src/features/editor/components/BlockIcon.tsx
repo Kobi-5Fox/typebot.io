@@ -37,6 +37,7 @@ import { ConditionIcon } from '@/features/blocks/logic/condition/components/Cond
 import { RedirectIcon } from '@/features/blocks/logic/redirect/components/RedirectIcon'
 import { SetVariableIcon } from '@/features/blocks/logic/setVariable/components/SetVariableIcon'
 import { TypebotLinkIcon } from '@/features/blocks/logic/typebotLink/components/TypebotLinkIcon'
+import { PancardIcon } from '@/features/blocks/inputs/pancard/components/PancardIcon'
 
 type BlockIconProps = { type: BlockType } & IconProps
 
@@ -61,6 +62,8 @@ export const BlockIcon = ({ type, ...props }: BlockIconProps): JSX.Element => {
       return <NumberInputIcon color={orange} {...props} />
     case InputBlockType.EMAIL:
       return <EmailInputIcon color={orange} {...props} />
+    case InputBlockType.PANCARD:
+      return <PancardIcon color={orange} {...props} />
     case InputBlockType.URL:
       return <UrlInputIcon color={orange} {...props} />
     case InputBlockType.DATE:

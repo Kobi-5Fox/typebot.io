@@ -17,6 +17,7 @@ import { ChoiceForm } from '@/features/blocks/inputs/buttons'
 import { PaymentForm } from '@/features/blocks/inputs/payment'
 import { RatingForm } from '@/features/blocks/inputs/rating'
 import { FileUploadForm } from '@/features/blocks/inputs/fileUpload'
+import { PancardInput } from '@/features/blocks/inputs/pancard'
 
 export const InputChatBlock = ({
   block,
@@ -127,6 +128,15 @@ const Input = ({
     case InputBlockType.EMAIL:
       return (
         <EmailInput
+          block={block}
+          onSubmit={onSubmit}
+          defaultValue={defaultValue}
+          hasGuestAvatar={hasGuestAvatar}
+        />
+      )
+    case InputBlockType.PANCARD:
+      return (
+        <PancardInput
           block={block}
           onSubmit={onSubmit}
           defaultValue={defaultValue}

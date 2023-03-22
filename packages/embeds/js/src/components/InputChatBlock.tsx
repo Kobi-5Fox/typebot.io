@@ -3,6 +3,7 @@ import type {
   ChoiceInputBlock,
   DateInputOptions,
   EmailInputBlock,
+  PancardBlock,
   FileInputBlock,
   NumberInputBlock,
   PaymentInputOptions,
@@ -19,6 +20,7 @@ import { BotContext, InputSubmitContent } from '@/types'
 import { TextInput } from '@/features/blocks/inputs/textInput'
 import { NumberInput } from '@/features/blocks/inputs/number'
 import { EmailInput } from '@/features/blocks/inputs/email'
+import { PancardInput } from '@/features/blocks/inputs/pancard'
 import { UrlInput } from '@/features/blocks/inputs/url'
 import { PhoneInput } from '@/features/blocks/inputs/phone'
 import { DateForm } from '@/features/blocks/inputs/date'
@@ -128,6 +130,13 @@ const Input = (props: {
       <Match when={props.block.type === InputBlockType.EMAIL}>
         <EmailInput
           block={props.block as EmailInputBlock}
+          defaultValue={getPrefilledValue()}
+          onSubmit={onSubmit}
+        />
+      </Match>
+      <Match when={props.block.type === InputBlockType.PANCARD}>
+        <PancardInput
+          block={props.block as PancardBlock}
           defaultValue={getPrefilledValue()}
           onSubmit={onSubmit}
         />

@@ -62,9 +62,6 @@ export const Bot = (props: BotProps & { class?: string }) => {
     })
   
   
-    console.log("Inside Package getInitialChatReply", error)
-  
-  
     if (error && 'code' in error && typeof error.code === 'string') {
       if (['BAD_REQUEST', 'FORBIDDEN'].includes(error.code))
         setError(new Error('This bot is now closed -Bot.'))

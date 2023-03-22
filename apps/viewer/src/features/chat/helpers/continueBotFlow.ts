@@ -21,6 +21,7 @@ import { validatePhoneNumber } from '@/features/blocks/inputs/phone/validatePhon
 import { validateUrl } from '@/features/blocks/inputs/url/validateUrl'
 import { updateVariables } from '@/features/variables/updateVariables'
 import { parseVariables } from '@/features/variables/parseVariables'
+import { validatePan } from '@/features/blocks/inputs/pancard/validatePan'
 
 export const continueBotFlow =
   (state: SessionState) =>
@@ -256,6 +257,8 @@ export const isReplyValid = (inputValue: string, block: Block): boolean => {
       return validatePhoneNumber(inputValue)
     case InputBlockType.URL:
       return validateUrl(inputValue)
+    case InputBlockType.PANCARD:
+      return validatePan(inputValue)
   }
   return true
 }

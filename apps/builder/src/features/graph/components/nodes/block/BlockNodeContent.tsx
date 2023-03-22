@@ -39,6 +39,7 @@ import { TypebotLinkNode } from '@/features/blocks/logic/typebotLink/components/
 import { ItemNodesList } from '../item/ItemNodesList'
 import { GoogleAnalyticsNodeBody } from '@/features/blocks/integrations/googleAnalytics/components/GoogleAnalyticsNodeBody'
 import { ChatwootNodeBody } from '@/features/blocks/integrations/chatwoot/components/ChatwootNodeBody'
+import { PancardNodeContent } from '@/features/blocks/inputs/pancard/components/PancardNodeContent'
 
 type Props = {
   block: Block | StartBlock
@@ -81,6 +82,14 @@ export const BlockNodeContent = ({ block, indices }: Props): JSX.Element => {
     case InputBlockType.EMAIL: {
       return (
         <EmailInputNodeContent
+          placeholder={block.options.labels.placeholder}
+          variableId={block.options.variableId}
+        />
+      )
+    }
+    case InputBlockType.PANCARD: {
+      return (
+        <PancardNodeContent
           placeholder={block.options.labels.placeholder}
           variableId={block.options.variableId}
         />

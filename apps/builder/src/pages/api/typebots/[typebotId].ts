@@ -16,8 +16,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const typebotId = req.query.typebotId as string
   
-  console.log("Request Method is ",req.method)
-
   if (req.method === 'GET') {
     const fullTypebot = await prisma.typebot.findFirst({
       where: {
