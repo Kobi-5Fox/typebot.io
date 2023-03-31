@@ -44,12 +44,11 @@ export const FileUploadForm = (props: Props) => {
   }
 
   const startSingleFileUpload = async (file: File) => {
-    // if (props.context.isPreview)
-    //   return props.onSubmit({
-    //     label: `File uploaded`,
-    //     value: 'http://fake-upload-url.com',
-        // value: 'https://api-uat.petromoney.in//api/checklist/2323432/doc/123',
-    //   })
+    if (props.context.isPreview)
+      return props.onSubmit({
+        label: `File uploaded`,
+        value: 'http://fake-upload-url.com'
+      })
     setIsUploading(true)
     const urls = await uploadFiles({
       basePath: `${props.context.apiHost ?? guessApiHost()}/api/typebots/${
@@ -68,13 +67,13 @@ export const FileUploadForm = (props: Props) => {
     setErrorMessage('An error occured while uploading the file')
   }
   const startFilesUpload = async (files: File[]) => {
-    // if (props.context.isPreview)
-    //   return props.onSubmit({
-    //     label: `${files.length} file${files.length > 1 ? 's' : ''} uploaded`,
-    //     value: files
-    //       .map((_, idx) => `http://fake-upload-url.com/${idx}`)
-    //       .join(', '),
-    //   })
+    if (props.context.isPreview)
+      return props.onSubmit({
+        label: `${files.length} file${files.length > 1 ? 's' : ''} uploaded`,
+        value: files
+          .map((_, idx) => `http://fake-upload-url.com/${idx}`)
+          .join(', '),
+      })
     setIsUploading(true)
     const urls = await uploadFiles({
       basePath: `${props.context.apiHost ?? guessApiHost()}/api/typebots/${

@@ -30,7 +30,7 @@ export const ChoiceForm = (props: Props) => {
     if (props.block.options?.isMultipleChoice)
       toggleSelectedItemIndex(itemIndex)
     else
-      props.onSubmit({ value: props.block.items[itemIndex - 1].content ?? '' })
+      props.onSubmit({ value: props.block.items[itemIndex].content ?? '' })
     console.log('Indices ', selectedIndices())
   }
 

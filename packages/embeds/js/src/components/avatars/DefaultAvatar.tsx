@@ -17,15 +17,15 @@ export const DefaultAvatar = () => {
         xmlns="http://www.w3.org/2000/svg"
         class={
           'absolute top-0 left-0 ' +
-          (isMobile() ? ' w-6 h-6 text-sm' : 'w-full h-full text-xl')
+          (isMobile() ? ' w-6 h-6 text-sm' : 'w-full h-full text-xl') 
         }
       >
         <mask id="mask0" x="0" y="0" mask-type="alpha">
-          <circle cx="37.5" cy="37.5" r="37.5" fill="#0042DA" />
+          <circle cx="37.5" cy="37.5" r="37.5" fill="#fc0b03" />
         </mask>
         <g mask="url(#mask0)">
-          <rect x="-30" y="-43" width="131" height="154" fill="#0042DA" />
-          <rect
+          <rect x="-30" y="-43" width="131" height="154" fill="#fc0b03" />
+          {/* <rect
             x="2.50413"
             y="120.333"
             width="81.5597"
@@ -46,7 +46,7 @@ export const DefaultAvatar = () => {
             d="M-49.8224 22L-15.5 -40.7879L18.8224 22H-49.8224Z"
             stroke="#F7F8FF"
             stroke-width="5"
-          />
+          /> */}
         </g>
       </svg>
     </figure>

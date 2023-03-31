@@ -60,6 +60,20 @@ const executeComparison =
           value
         )
       }
+      case ComparisonOperators.GREATER_OR_EQUAL: {
+        return compare(
+          (a, b) => parseFloat(a) >= parseFloat(b),
+          inputValue,
+          value
+        )
+      }
+      case ComparisonOperators.LESSER_OR_EQUAL: {
+        return compare(
+          (a, b) => parseFloat(a) <= parseFloat(b),
+          inputValue,
+          value
+        )
+      }
       case ComparisonOperators.LESS: {
         return compare(
           (a, b) => parseFloat(a) < parseFloat(b),

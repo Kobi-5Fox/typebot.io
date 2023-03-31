@@ -15,6 +15,8 @@ export enum ComparisonOperators {
   CONTAINS = 'Contains',
   GREATER = 'Greater than',
   LESS = 'Less than',
+  GREATER_OR_EQUAL = 'Greater or equal to',
+  LESSER_OR_EQUAL = 'Lesser or equal to',
   IS_SET = 'Is set',
 }
 

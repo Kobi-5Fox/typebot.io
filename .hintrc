@@ -8,6 +8,7 @@
       {
         "aria-roles": "off"
       }
-    ]
+    ],
+    "no-inline-styles": "off"
   }
 }

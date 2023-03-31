@@ -18,6 +18,7 @@ import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/enums
 import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/enums'
 import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/enums'
 import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/enums'
+import { blob } from 'aws-sdk/clients/codecommit'
 
 export const sendRequest = async <ResponseData>(
   params:
@@ -30,8 +31,9 @@ export const sendRequest = async <ResponseData>(
 ): Promise<{ data?: ResponseData; error?: Error }> => {
   try {
     const url = typeof params === 'string' ? params : params.url
+    console.log('Inside pakages/lib/utils.ts url is ', url)
     const response = await fetch(url, {
-      method: typeof params === 'string' ? 'GET' : params.method,
+      method: typeof params === 'string' ? 'PUT' : params.method,
       mode: 'cors',
       headers:
         typeof params !== 'string' && isDefined(params.body)
@@ -208,25 +210,45 @@ export const uploadFiles = async ({
   onUploadProgress,
 }: UploadFileProps): Promise<UrlList> => {
   console.log('Files lenth ', files.length)
-  const urls = ['Success']
+  const urls = []
   let i = 0
   for (const { file, path } of files) {
+    onUploadProgress && onUploadProgress((i / files.length) * 100)
+    i += 1
+    console.log('Inside uploadFiles')
+    const { data } = await sendRequest<{
+      presignedUrl: { url: string; fields: any }
+      hasReachedStorageLimit: boolean
+    }>(
+      `${basePath}/storage/upload-url?filePath=${encodeURIComponent(
+        path
+      )}&fileType=${file.type}`
+    )
+
+    if (!data?.presignedUrl) continue
+
+    const { url, fields } = data.presignedUrl
+    if (data.hasReachedStorageLimit) urls.push(null)
+    else {
+      const formData = new FormData()
+      Object.entries({ ...fields, file }).forEach(([key, value]) => {
+        formData.append(key, value as string | Blob)
+      })
+      const upload = await fetch(url, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!upload.ok) continue
+
+      urls.push(`${url.split('?')[0]}/${path}`)
+    }
     const formData = new FormData()
-    formData.append('files', file)
-
-    // const upload = await fetch("https://api-uat.petromoney.in/api/checklist/2323432/doc/4", {
-    const upload = await fetch('http://localhost:4000/', {
-      method: 'POST',
-      body: formData,
-      headers: new Headers({
-        Authorization:
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODAxNjcwMDAsIm5iZiI6MTY4MDE2NzAwMCwianRpIjoiNmExOWEzMWMtYjIxNC00ODY1LWJmYWItYTg4OWMyNjg4YTE0IiwiZXhwIjoxNjgwMjUzNDAwLCJpZGVudGl0eSI6MTU4NiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kMe4iWq3tTUc46FuSulnaLPCKs5dqxSJtlioyrMDL8k',
-      }),
+    Object.entries(file).forEach(([key, value]) => {
+      formData.append(key, value as string | Blob)
     })
-    console.log('Uploaded Result ', upload)
-    if (!upload.ok) continue
 
-    // urls.push(`${url.split('?')[0]}/${path}`)
+    urls.push(`${url.split('?')[0]}/${path}`)
   }
   return urls
 }

@@ -12,11 +12,11 @@ export const DefaultAvatar = (props: IconProps) => {
       {...props}
     >
       <mask id="mask0" x="0" y="0" mask-type="alpha">
-        <circle cx="37.5" cy="37.5" r="37.5" fill="#0042DA" />
+        <circle cx="37.5" cy="37.5" r="37.5" fill="#fc0b03" />
       </mask>
       <g mask="url(#mask0)">
-        <rect x="-30" y="-43" width="131" height="154" fill="#0042DA" />
-        <rect
+        <rect x="-30" y="-43" width="131" height="154" fill="#fc0b03" />
+        {/* <rect
           x="2.50413"
           y="120.333"
           width="81.5597"
@@ -25,13 +25,13 @@ export const DefaultAvatar = (props: IconProps) => {
           transform="rotate(-52.6423 2.50413 120.333)"
           stroke="#FED23D"
           strokeWidth="5"
-        />
-        <circle cx="76.5" cy="-1.5" r="29" stroke="#FF8E20" strokeWidth="5" />
-        <path
+        /> */}
+        {/* <circle cx="76.5" cy="-1.5" r="29" stroke="#FF8E20" strokeWidth="5" /> */}
+        {/* <path
           d="M-49.8224 22L-15.5 -40.7879L18.8224 22H-49.8224Z"
           stroke="#F7F8FF"
           strokeWidth="5"
-        />
+        /> */}
       </g>
     </Icon>
   )
