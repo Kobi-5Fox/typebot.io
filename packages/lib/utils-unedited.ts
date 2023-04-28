@@ -33,7 +33,7 @@ export const sendRequest = async <ResponseData>(
     const url = typeof params === 'string' ? params : params.url
     console.log('Inside pakages/lib/utils.ts url is ', url)
     const response = await fetch(url, {
-      method: typeof params === 'string' ? 'PUT' : params.method,
+      method: typeof params === 'string' ? 'GET' : params.method,
       mode: 'cors',
       headers:
         typeof params !== 'string' && isDefined(params.body)
@@ -209,13 +209,11 @@ export const uploadFiles = async ({
   files,
   onUploadProgress,
 }: UploadFileProps): Promise<UrlList> => {
-  console.log('Files lenth ', files.length)
   const urls = []
   let i = 0
   for (const { file, path } of files) {
     onUploadProgress && onUploadProgress((i / files.length) * 100)
     i += 1
-    console.log('Inside uploadFiles')
     const { data } = await sendRequest<{
       presignedUrl: { url: string; fields: any }
       hasReachedStorageLimit: boolean

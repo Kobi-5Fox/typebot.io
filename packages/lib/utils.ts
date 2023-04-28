@@ -207,26 +207,30 @@ export const uploadFiles = async ({
   files,
   onUploadProgress,
 }: UploadFileProps): Promise<UrlList> => {
-  console.log('Files lenth ', files.length)
-  const urls = ['Success']
+  const urls: (string | null)[] = []
   let i = 0
   for (const { file, path } of files) {
+    onUploadProgress && onUploadProgress((i / files.length) * 100)
+    i += 1
     const formData = new FormData()
     formData.append('files', file)
-
+    //**  Uncomment the below commented lines to send files through petromoney UAT server */
     // const upload = await fetch("https://api-uat.petromoney.in/api/checklist/2323432/doc/4", {
-    const upload = await fetch('http://localhost:4000/', {
+    // method: 'POST',
+    // body: formData,
+    // headers: new Headers({
+    //   Authorization:
+    //     'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODAxNjcwMDAsIm5iZiI6MTY4MDE2NzAwMCwianRpIjoiNmExOWEzMWMtYjIxNC00ODY1LWJmYWItYTg4OWMyNjg4YTE0IiwiZXhwIjoxNjgwMjUzNDAwLCJpZGVudGl0eSI6MTU4NiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kMe4iWq3tTUc46FuSulnaLPCKs5dqxSJtlioyrMDL8k',
+    // }),
+    // })
+    //**  Sending files to Azure storage */
+    const upload = await fetch(`${basePath}/storage/upload-azure`, {
       method: 'POST',
       body: formData,
-      headers: new Headers({
-        Authorization:
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODAxNjcwMDAsIm5iZiI6MTY4MDE2NzAwMCwianRpIjoiNmExOWEzMWMtYjIxNC00ODY1LWJmYWItYTg4OWMyNjg4YTE0IiwiZXhwIjoxNjgwMjUzNDAwLCJpZGVudGl0eSI6MTU4NiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kMe4iWq3tTUc46FuSulnaLPCKs5dqxSJtlioyrMDL8k',
-      }),
     })
-    console.log('Uploaded Result ', upload)
     if (!upload.ok) continue
-
     // urls.push(`${url.split('?')[0]}/${path}`)
+    urls.push(Object.values(await upload.json())[0] as string | null)
   }
   return urls
 }

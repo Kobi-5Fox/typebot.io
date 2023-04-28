@@ -179,8 +179,8 @@ const parseComparisonOperatorSymbol = (operator: ComparisonOperators) => {
     case ComparisonOperators.NOT_EQUAL:
       return '!='
     case ComparisonOperators.GREATER_OR_EQUAL:
-      return ">="
+      return '>='
     case ComparisonOperators.LESSER_OR_EQUAL:
-      return "<="
+      return '<='
   }
 }
