@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import nextConnect from 'next-connect'
 import multer from 'multer'
-import cors from 'nextjs-cors'
 import { NextApiRequest, NextApiResponse, PageConfig } from 'next'
 import {
   BlobServiceClient,
